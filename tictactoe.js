@@ -1,6 +1,6 @@
 var origBoard;
 const huPlayer = "O";
-const aiPayer = "X";
+const aiPlayer = "X";
 const winCombos = [
   [0, 1, 2],
   [3, 4, 5],
@@ -27,7 +27,11 @@ function startGame() {
 }
 
 function turnClick(square) {
-  turn(square.target.id, huPlayer);
+  //make it so you can't click on a space that is already in play
+  if (typeof origBoard[square.target.id] == "number") {
+    turn(square.target.id, huPlayer);
+    if (!checkTie()) turn(bestSpot(), aiPlayer);
+  }
 }
 
 function turn(squareId, player) {
@@ -69,4 +73,35 @@ function gameOver(gameWon) {
   for (var i = 0; i < cells.length; i++) {
     cells[i].removeEventListener("click", turnClick, false);
   }
+  declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose!");
+}
+
+function declareWinner(who) {
+  document.querySelector(".endgame").style.display = "block";
+  document.querySelector(".endgame .text").innerText = who;
+}
+
+//functions below create the CPU "ai"
+
+function emptySquares() {
+  //filter to see if it is a number, if so return it
+  return origBoard.filter((s) => typeof s == "number");
+}
+
+function bestSpot() {
+  //find first open square
+  return emptySquares()[0];
+}
+
+//function to check if there is a tie
+function checkTie() {
+  if (emptySquares().length == 0) {
+    for (var i = 0; i < cells.length; i++) {
+      cells[i].style.backgroundColor = "green";
+      cells[i].removeEventListener("click", turnClick, false);
+    }
+    declareWinner("Tie Game!");
+    return true;
+  }
+  return false;
 }
