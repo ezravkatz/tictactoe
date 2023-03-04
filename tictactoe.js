@@ -67,7 +67,7 @@ function checkWin(board, player) {
 function gameOver(gameWon) {
   for (let index of winCombos[gameWon.index]) {
     document.getElementById(index).style.backgroundColor =
-      gameWon.player == huPlayer ? "blue" : "red";
+      gameWon.player == huPlayer ? "#8fd3fe" : "#893101";
   }
   //make it so you can't click cells
   for (var i = 0; i < cells.length; i++) {
@@ -97,7 +97,7 @@ function bestSpot() {
 function checkTie() {
   if (emptySquares().length == 0) {
     for (var i = 0; i < cells.length; i++) {
-      cells[i].style.backgroundColor = "green";
+      cells[i].style.backgroundColor = "#83f28f";
       cells[i].removeEventListener("click", turnClick, false);
     }
     declareWinner("Tie Game!");

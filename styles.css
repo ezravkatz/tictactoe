@@ -1,5 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 1.5rem;
+
+  background-image: linear-gradient(
+      rgba(83, 10, 28, 0.4),
+      rgba(83, 10, 08, 0.4)
+    ),
+    url(bg.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+:root {
+  --cell-size: 100px;
+  --mark-size: calc(var(--cell-size) * 0.9);
+}
+
 td {
-  border: 2px solid #333;
+  border: 2px solid #ffe87c;
   height: 100px;
   width: 100px;
   text-align: center;
@@ -9,35 +33,263 @@ td {
   cursor: pointer;
 }
 
-table {
+tr {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+}
+
+.table {
   border-collapse: collapse;
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  align-self: center;
+  position: relative;
+  margin-left: 4rem;
+  grid-template-columns: repeat(3, auto);
+}
+
+.board {
+  width: 50vw;
+  height: 50vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  align-self: center;
+  position: relative;
+  margin-left: 4rem;
+  grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 1px solid #ffe87c;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+}
+
+.welcome-text {
+  text-align: center;
+  padding: 20px;
+  font-weight: 300;
+  background-color: #ffe87c;
+  color: #fbb917;
+}
+
+.filler {
+  height: 20px;
+}
+
+.container {
+  margin: 10vh 20%;
+  min-height: 80vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
+}
+
+.box {
+  cursor: pointer;
+  border: 1px solid rgba(107, 16, 39, 0.4);
+  margin: 0 -1.5px;
+  transition: all 300ms ease-in-out;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #ffe87c;
+}
+
+.box:hover {
+  background-color: #ffffc2;
+}
+
+.box[value="X"] {
+  color: red;
+}
+
+.box:disabled {
+  cursor: not-allowed;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.winner {
+  color: blueviolet;
+}
+
+.winner-screen .overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.winner-screen .message-box {
   position: absolute;
-  left: 50%;
-  margin-left: -155px;
-  top: 50px;
+  width: 30vw;
+  left: 35vw;
+  top: 35vh;
+  text-align: center;
+  z-index: 11;
+  background-color: white;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
 }
 
-table tr:first-child td {
-  border-top: 0;
+.winner-screen .replay-button:focus {
+  border: none;
 }
 
-table tr:last-child td {
-  border-bottom: 0;
+.message-box .title {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 10px 0;
+  font-size: 20px;
 }
 
-table tr td:first-child {
-  border-left: 0;
+.message-box .body {
+  margin: 20px 0;
+  font-size: 25px;
 }
 
-table tr td:last-child {
-  border-right: 0;
+#new-game,
+.replay-button {
+  padding: 10px 20px;
+  color: white;
+  background-color: #ee9a4d;
+  border: none;
+  margin: 40px 0;
+  transition: all 300ms ease-in-out;
+}
+
+.replay-button {
+  background-color: purple;
+}
+
+#new-game:hover,
+.replay-button:hover {
+  transform: scale(1.15, 1.15);
+  background-color: red;
+  cursor: pointer;
+}
+
+#new-game:active,
+.replay-button:active {
+  transition: none;
+  background-color: maroon;
+}
+
+.button-wrapper {
+  text-align: center;
+}
+
+.score {
+  width: 15vw;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  background-color: rgb(143, 198, 196, 0.3);
+  color: white;
+  z-index: 10;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.score-header {
+  background-color: rgba(245, 37, 73, 0.3);
+  color: white;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.player-scores {
+  padding: 10px 0;
+}
+
+.player-scores.X {
+  background-color: rgb(249, 101, 116, 0.3);
+}
+
+.player-scores.Y {
+  padding: 10px 0;
+}
+
+button {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 20px;
+}
+
+.turn-indicator {
+  font-size: 20px;
+  color: white;
+}
+
+.fade-in {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 300ms ease-in-out;
+}
+
+.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s 300ms, opacity 300ms ease-in-out;
+}
+
+.winningMessage {
+  display: none !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5rem;
+  flex-direction: column;
+}
+
+.winningMessage button {
+  font-size: 3rem;
+  background-color: white;
+  border: 1px solid black;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+}
+
+.winningMessage button:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
+
+.winningMessage.show {
+  display: flex;
 }
 
 .endgame {
   display: none;
   width: 200px;
-  top: 120px;
-  background-color: rgba(205, 133, 63, 0.8);
+  top: 300px;
+  background-color: rgba(227, 90, 90, 0.8);
   position: absolute;
   left: 50%;
   margin-left: -100px;
@@ -47,4 +299,67 @@ table tr td:last-child {
   border-radius: 5px;
   color: white;
   font-size: 2em;
+}
+
+button {
+  padding: 10px 20px;
+  color: white;
+  background-color: #e35a5a;
+  border: none;
+  margin: 40px 0;
+  transition: all 300ms ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.15, 1.15);
+  background-color: #f59393;
+  cursor: pointer;
+}
+
+.playerWin {
+  color: #8fd3fe;
+}
+
+.computerWin {
+  color: #893101;
+}
+
+.draw {
+  color: #83f28f;
+}
+
+/* media queries */
+
+@media screen and (max-width: 991px) {
+  .box {
+    width: 30vw;
+    height: 29vw;
+    transition: none;
+  }
+
+  #new-game {
+    transform: scale(2, 2);
+  }
+
+  #new-game:hover {
+    transform: scale(2.5, 2.5);
+  }
+
+  .score {
+    width: 100vw;
+    font-size: 3rem;
+  }
+
+  .score .score-header {
+    font-size: 3rem;
+  }
+
+  .welcome-text {
+    font-size: 4rem;
+  }
+
+  .container {
+    height: 100vh;
+    margin: 0;
+  }
 }
