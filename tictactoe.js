@@ -88,8 +88,16 @@ function emptySquares() {
   return origBoard.filter((s) => typeof s == "number");
 }
 
+const addComputerMove = () => {
+  do {
+    selected = Math.floor(Math.random() * 9);
+  } while (origBoard[selected] != "");
+  origBoard[selected] = aiPlayer;
+  render_board();
+};
+
 function bestSpot() {
-  //find first open square
+  //find first open squares
   return emptySquares()[0];
 }
 
